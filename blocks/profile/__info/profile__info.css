@@ -1,0 +1,11 @@
+.profile__info {
+  max-height: 73px;
+  display: grid;
+  grid-template-columns: repeat(minmax(min-content, 1fr), 2fr);
+  grid-template-rows: repeat(minmax(min-content, 1fr), 2fr);
+  grid-template-areas:
+    'name button'
+    'about about';
+  gap: 11px 18px;
+  margin: auto 0 auto 30px;
+}

@@ -1,0 +1,10 @@
+.profile__about {
+  grid-area: about;
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  height: 18px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
