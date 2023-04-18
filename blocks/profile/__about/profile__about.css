@@ -1,5 +1,4 @@
 .profile__about {
-  grid-area: about;
   margin: 0;
   font-weight: 400;
   font-size: 18px;
@@ -9,9 +8,9 @@
   text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 389px) {
+@media screen and (max-width: 659px) {
   .profile__about {
-    /* width: 282px; */
+    width: 282px;
     height: 14px;
     font-weight: 400;
     font-size: 14px;
