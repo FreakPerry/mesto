@@ -6,6 +6,10 @@
 
 @import url(../fonts/inter.css);
 
+/* animation */
+
+@import url(../blocks/button/button.css);
+
 /* root & page */
 
 @import url(../blocks/root/root.css);

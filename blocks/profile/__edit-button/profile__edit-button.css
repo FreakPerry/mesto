@@ -8,8 +8,6 @@
   align-self: end;
   background-color: #000;
   border: 1px solid #fff;
-  padding: 0;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 389px) {

@@ -7,9 +7,7 @@
   background-position: center;
   margin: auto;
   margin-right: 0;
-  padding: 0;
   border: 1px #fff solid;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 659px) {
