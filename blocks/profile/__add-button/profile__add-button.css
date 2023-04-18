@@ -3,9 +3,18 @@
   height: 50px;
   background-color: #000;
   background-image: url(../../../images/Add\ Button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
   margin: auto;
   margin-right: 0;
   padding: 0;
-  border: 0;
+  border: 1px #fff solid;
   cursor: pointer;
+}
+
+@media screen and (max-width: 659px) {
+  .profile__add-button {
+    width: 282px;
+    margin: 36px 0 0 0;
+  }
 }

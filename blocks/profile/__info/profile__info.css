@@ -6,6 +6,14 @@
   grid-template-areas:
     'name button'
     'about about';
-  gap: 11px 18px;
+  gap: 16px 18px;
   margin: auto 0 auto 30px;
+}
+
+@media screen and (max-width: 659px) {
+  .profile__info {
+    max-width: 282px;
+    margin: 26px 0 0 0;
+    gap: 14px 10px;
+  }
 }

@@ -1,0 +1,15 @@
+.popup__form-fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 54px 0 0 0;
+  padding: 0;
+  border: 0;
+  gap: 30px;
+}
+
+@media screen and (max-width: 389px) {
+  .popup__form-fieldset {
+    margin-top: 75px;
+  }
+}

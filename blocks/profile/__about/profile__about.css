@@ -8,3 +8,14 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+@media screen and (max-width: 389px) {
+  .profile__about {
+    /* width: 282px; */
+    height: 14px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+}
