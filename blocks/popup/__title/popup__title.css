@@ -1,5 +1,4 @@
 .popup__title {
-  height: 23px;
   white-space: nowrap;
   text-overflow: ellipsis;
   font-weight: 900;
@@ -10,7 +9,6 @@
 
 @media screen and (max-width: 389px) {
   .popup__title {
-    height: 22px;
     font-size: 18px;
     line-height: 22px;
   }

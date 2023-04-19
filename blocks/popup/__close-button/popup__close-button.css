@@ -5,7 +5,7 @@
   background-image: url(../../../images/Close\ Icon.svg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.1);
   width: 32px;
   height: 32px;
 }

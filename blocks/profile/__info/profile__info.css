@@ -2,9 +2,9 @@
   width: 336px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 7px;
   position: relative;
-  margin: auto 0 auto 30px;
+  margin: 22px 0 25px 30px;
 }
 
 @media screen and (max-width: 659px) {
@@ -12,6 +12,6 @@
     align-items: center;
     max-width: 282px;
     margin: 26px 0 0 0;
-    gap: 14px 10px;
+    gap: 2px;
   }
 }

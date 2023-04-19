@@ -5,14 +5,16 @@
   background-image: url(../../../images/Add\ Button.svg);
   background-repeat: no-repeat;
   background-position: center;
-  margin: auto;
-  margin-right: 0;
-  border: 1px #fff solid;
+  background-size: 22px 22px;
+  margin: 35px 0 35px auto;
+  border: 2px #fff solid;
+  border-radius: 2px;
 }
 
 @media screen and (max-width: 659px) {
   .profile__add-button {
     width: 282px;
-    margin: 36px 0 0 0;
+    margin: 32px 0 0 0;
+    background-size: 16px 16px;
   }
 }

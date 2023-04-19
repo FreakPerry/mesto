@@ -12,78 +12,112 @@
       <header class="header">
         <img class="header__logo" src="images/logo.svg" alt="Логотип" />
       </header>
-      <section class="profile">
-        <img class="profile__avatar" src="images/kusto.jpg" alt="аватар" />
-        <article class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <p class="profile__about">Исследователь океана</p>
-          <button class="button profile__edit-button" type="button"></button>
-        </article>
-        <button class="button profile__add-button" type="button"></button>
-      </section>
-      <section class="elements">
-        <ul class="cards">
-          <li class="card">
-            <img class="card__image" src="images/krachevsk.jpg" />
-            <div class="card__info">
-              <div class="card__description">Карачаевск</div>
-              <button class="button card__like-button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="images/krachevsk.jpg" />
-            <div class="card__info">
-              <div class="card__description">Карачаевск</div>
-              <button class="button card__like-button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="images/krachevsk.jpg" />
-            <div class="card__info">
-              <div class="card__description">Карачаевск</div>
-              <button class="button card__like-button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="images/krachevsk.jpg" />
-            <div class="card__info">
-              <div class="card__description">Карачаевск</div>
-              <button class="button card__like-button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="images/krachevsk.jpg" />
-            <div class="card__info">
-              <div class="card__description">Карачаевск</div>
-              <button class="button card__like-button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="images/krachevsk.jpg" />
-            <div class="card__info">
-              <div class="card__description">Карачаевск</div>
-              <button class="button card__like-button" type="button"></button>
-            </div>
-          </li>
-        </ul>
-      </section>
+      <main>
+        <section class="profile">
+          <img class="profile__avatar" src="images/kusto.jpg" alt="аватар" />
+          <div class="profile__info">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <p class="profile__about">Исследователь океана</p>
+            <button class="button profile__edit-button" type="button"></button>
+          </div>
+          <button class="button profile__add-button" type="button"></button>
+        </section>
+        <section class="elements">
+          <div class="cards">
+            <article class="card">
+              <img
+                class="card__image"
+                src="images/krachevsk.jpg"
+                alt="Сентинский храм в Карачаево-Черкесии"
+              />
+              <div class="card__info">
+                <h2 class="card__description">Карачаево-Черкесия</h2>
+                <button class="button card__like-button" type="button"></button>
+              </div>
+            </article>
+            <article class="card">
+              <img
+                class="card__image"
+                src="images/krachevsk.jpg"
+                alt="Сентинский храм в Карачаево-Черкесии"
+              />
+              <div class="card__info">
+                <h2 class="card__description">Карачаевск</h2>
+                <button class="button card__like-button" type="button"></button>
+              </div>
+            </article>
+            <article class="card">
+              <img
+                class="card__image"
+                src="images/krachevsk.jpg"
+                alt="Сентинский храм в Карачаево-Черкесии"
+              />
+              <div class="card__info">
+                <h2 class="card__description">Карачаевск</h2>
+                <button class="button card__like-button" type="button"></button>
+              </div>
+            </article>
+            <article class="card">
+              <img
+                class="card__image"
+                src="images/krachevsk.jpg"
+                alt="Сентинский храм в Карачаево-Черкесии"
+              />
+              <div class="card__info">
+                <h2 class="card__description">Карачаевск</h2>
+                <button class="button card__like-button" type="button"></button>
+              </div>
+            </article>
+            <article class="card">
+              <img
+                class="card__image"
+                src="images/krachevsk.jpg"
+                alt="Сентинский храм в Карачаево-Черкесии"
+              />
+              <div class="card__info">
+                <h2 class="card__description">Карачаевск</h2>
+                <button class="button card__like-button" type="button"></button>
+              </div>
+            </article>
+            <article class="card">
+              <img
+                class="card__image"
+                src="images/krachevsk.jpg"
+                alt="Сентинский храм в Карачаево-Черкесии"
+              />
+              <div class="card__info">
+                <h2 class="card__description">Карачаевск</h2>
+                <button class="button card__like-button" type="button"></button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
       <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
       <div class="popup">
         <div class="popup__container">
           <button class="button popup__close-button" type="button"></button>
-          <form action="" class="popup__form">
-            <h2 class="popup__title">Редактировать профиль</h2>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form name="editProfilePopup" class="popup__form">
             <fieldset class="popup__form-fieldset">
-              <label for="">
-                <input type="text" class="popup__form-input" placeholder="Ваше Имя" />
-              </label>
-              <label for="">
-                <input type="text" class="popup__form-input" placeholder="Место Работы" />
-              </label>
+              <input
+                type="text"
+                class="popup__form-input"
+                placeholder="Ваше Имя"
+                name="nameInput"
+                id="name-input"
+              />
+              <input
+                type="text"
+                class="popup__form-input"
+                placeholder="Место Работы"
+                name="aboutInput"
+                id="about-input"
+              />
             </fieldset>
-            <button class="button popup__save-button" type="button">Сохранить</button>
+            <button class="popup__save-button" type="submit">Сохранить</button>
           </form>
         </div>
       </div>

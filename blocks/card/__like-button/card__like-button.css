@@ -2,8 +2,8 @@
   width: 22px;
   height: 19px;
   background-image: url(../../../images/heart-button.svg);
-  position: absolute;
-  top: 30px;
-  right: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   background-color: #fff;
 }
