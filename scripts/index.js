@@ -11,10 +11,10 @@ const formElement = popupElement.querySelector('.popup__form');
 const nameInput = document.getElementById('name-input');
 const aboutInput = document.getElementById('about-input');
 
-nameInput.value = profileNameElement.textContent;
-aboutInput.value = profileAboutElement.textContent;
-
 const togglePopupVisability = function () {
+  nameInput.value = profileNameElement.textContent;
+  aboutInput.value = profileAboutElement.textContent;
+
   popupElement.classList.toggle('popup_is-opened');
 };
 
