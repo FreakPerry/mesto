@@ -60,9 +60,6 @@ const imageLinkInput = document.getElementById('link-input');
 
 // cards
 
-const cards = document.querySelectorAll('.card');
-const cardTemplate = document.querySelector('.card-template');
-
 // functions
 
 const togglePopupVisability = function (popup) {
@@ -102,3 +99,41 @@ editPopupCloseButton.addEventListener('click', () => {
 addPopupCloseButton.addEventListener('click', () => {
   handlePopupCloseButtonClick(popupAdd);
 });
+
+const cardContainer = document.querySelector('.cards');
+const cardTemplate = document.querySelector('#crad-template');
+
+const createCard = ({ name, link }) => {
+  const card = document.createElement('article');
+  card.classList.add('card');
+  const img = document.createElement('img');
+  img.classList.add('card__image');
+  img.src = link;
+  img.alt = name;
+  const infoContainer = document.createElement('div');
+  infoContainer.classList.add('card__info');
+  const cardTitle = document.createElement('h2');
+  cardTitle.classList.add('card__description');
+  cardTitle.textContent = name;
+  const likeButton = document.createElement('button');
+  likeButton.classList.add('button', 'card__like-button');
+  const deleteButton = document.createElement('button');
+  deleteButton.classList.add('card__delete-button', 'button');
+
+  infoContainer.append(cardTitle, likeButton);
+
+  card.append(img, infoContainer, deleteButton);
+
+  return card;
+};
+
+const cardList = initialCards.map(cardData => {
+  const cardElement = createCard(cardData);
+  return cardElement;
+});
+
+const renderCard = cardData => {
+  cardContainer.prepend(createCard(cardData));
+};
+
+cardContainer.prepend(...cardList);
