@@ -54,7 +54,7 @@ const aboutInput = document.getElementById('about-input');
 
 const addPopupCloseButton = popupAdd.querySelector('#add-popup-close-button');
 const addPopupCreateButton = popupAdd.querySelector('.popup__save-button');
-const addCardForm = popupAdd.querySelector('.popup__form');
+const addCardForm = popupAdd.querySelector('#add-card-form');
 const titleInput = document.getElementById('title-input');
 const imageLinkInput = document.getElementById('link-input');
 
@@ -104,27 +104,24 @@ const cardContainer = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#crad-template');
 
 const createCard = ({ name, link }) => {
-  const card = document.createElement('article');
-  card.classList.add('card');
-  const img = document.createElement('img');
-  img.classList.add('card__image');
-  img.src = link;
-  img.alt = name;
-  const infoContainer = document.createElement('div');
-  infoContainer.classList.add('card__info');
-  const cardTitle = document.createElement('h2');
-  cardTitle.classList.add('card__description');
-  cardTitle.textContent = name;
-  const likeButton = document.createElement('button');
-  likeButton.classList.add('button', 'card__like-button');
-  const deleteButton = document.createElement('button');
-  deleteButton.classList.add('card__delete-button', 'button');
+  const string = `<article class="card" id="card-template">
+  <img
+    class="card__image"
+    src="${link}"
+    alt="${name}"
+  />
+  <div class="card__info">
+    <h2 class="card__description">${name}</h2>
+    <button class="button card__like-button" type="button"></button>
+  </div>
+  <button class="card__delete-button button" type="button"></button>
+</article>`;
+  const tempContainer = document.createElement('div');
+  tempContainer.insertAdjacentHTML('afterbegin', string);
 
-  infoContainer.append(cardTitle, likeButton);
+  const article = tempContainer.firstElementChild;
 
-  card.append(img, infoContainer, deleteButton);
-
-  return card;
+  return article;
 };
 
 const cardList = initialCards.map(cardData => {
@@ -137,3 +134,14 @@ const renderCard = cardData => {
 };
 
 cardContainer.prepend(...cardList);
+
+const hendleAddFormSubmit = evt => {
+  evt.preventDefault();
+  const name = titleInput.value;
+  const link = imageLinkInput.value;
+  const cardData = { name, link };
+  renderCard(cardData);
+  togglePopupVisability(popupAdd);
+};
+
+addCardForm.addEventListener('submit', hendleAddFormSubmit);
