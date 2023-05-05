@@ -41,6 +41,7 @@ const addCardButton = profileElement.querySelector('.profile__add-button');
 
 const popupEdit = document.querySelector('#popup-edit-profile');
 const popupAdd = document.querySelector('#popup-add-card');
+const popupImage = document.querySelector('#popup-card-image');
 
 // edit popup elements
 
@@ -58,7 +59,14 @@ const addCardForm = popupAdd.querySelector('#add-card-form');
 const titleInput = document.getElementById('title-input');
 const imageLinkInput = document.getElementById('link-input');
 
+// img popup
+
+const imagePopupCloseButton = popupImage.querySelector('#pup-img-cls-btn');
+
 // cards
+
+const cardContainer = document.querySelector('.cards');
+const cardTemplate = document.querySelector('#crad-template');
 
 // functions
 
@@ -100,28 +108,30 @@ addPopupCloseButton.addEventListener('click', () => {
   handlePopupCloseButtonClick(popupAdd);
 });
 
-const cardContainer = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#crad-template');
-
 const createCard = ({ name, link }) => {
-  const string = `<article class="card" id="card-template">
-  <img
-    class="card__image"
-    src="${link}"
-    alt="${name}"
-  />
-  <div class="card__info">
-    <h2 class="card__description">${name}</h2>
-    <button class="button card__like-button" type="button"></button>
-  </div>
-  <button class="card__delete-button button" type="button"></button>
-</article>`;
-  const tempContainer = document.createElement('div');
-  tempContainer.insertAdjacentHTML('afterbegin', string);
+  const card = cardTemplate.content.querySelector('.card').cloneNode(true);
+  card.querySelector('.card__image').src = link;
+  card.querySelector('.card__image').alt = name;
+  card.querySelector('.card__description').textContent = name;
 
-  const article = tempContainer.firstElementChild;
+  card.querySelector('.card__delete-button').addEventListener('click', () => {
+    card.remove();
+  });
 
-  return article;
+  const like = card.querySelector('.card__like-button');
+  like.addEventListener('click', () => {
+    like.classList.toggle('card__like-button_active');
+  });
+
+  card.querySelector('.card__image').addEventListener('click', () => {
+    popupImage.querySelector('.popup__caption').textContent = name;
+    const img = popupImage.querySelector('.popup__image');
+    img.src = link;
+    img.alt = name;
+    togglePopupVisability(popupImage);
+  });
+
+  return card;
 };
 
 const cardList = initialCards.map(cardData => {
@@ -145,3 +155,7 @@ const hendleAddFormSubmit = evt => {
 };
 
 addCardForm.addEventListener('submit', hendleAddFormSubmit);
+
+imagePopupCloseButton.addEventListener('click', () => {
+  togglePopupVisability(popupImage);
+});
