@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // profile info
 
 const profileElement = document.querySelector('.profile');
@@ -48,16 +21,16 @@ const popupImage = document.querySelector('#popup-card-image');
 const editPopupCloseButton = popupEdit.querySelector('.popup__close-button');
 const popupSaveButton = popupEdit.querySelector('.popup__save-button');
 const formElement = popupEdit.querySelector('.popup__form');
-const nameInput = document.getElementById('name-input');
-const aboutInput = document.getElementById('about-input');
+const nameInput = popupEdit.querySelector('.popup__form-input[name="nameInput"]');
+const aboutInput = popupEdit.querySelector('.popup__form-input[name="aboutInput"]');
 
 // add popup elements
 
 const addPopupCloseButton = popupAdd.querySelector('#add-popup-close-button');
 const addPopupCreateButton = popupAdd.querySelector('.popup__save-button');
-const addCardForm = popupAdd.querySelector('#add-card-form');
-const titleInput = document.getElementById('title-input');
-const imageLinkInput = document.getElementById('link-input');
+const addCardForm = popupAdd.querySelector('.popup__form[name="addCardPopup"]');
+const titleInput = popupAdd.querySelector('.popup__form-input[name="titleInput"]');
+const imageLinkInput = popupAdd.querySelector('.popup__form-input[name="linkInput"]');
 
 // img popup
 
@@ -70,34 +43,38 @@ const cardTemplate = document.querySelector('#crad-template');
 
 // functions
 
-const togglePopupVisability = function (popup) {
-  popup.classList.toggle('popup_is-opened');
+const openPopup = function (popup) {
+  popup.classList.add('popup_is-opened');
 };
 
-function handleFormSubmit(evt) {
+const closePopup = function (popup) {
+  popup.classList.remove('popup_is-opened');
+};
+
+function handleEditFormSubmit(evt) {
   evt.preventDefault();
   profileNameElement.textContent = nameInput.value;
   profileAboutElement.textContent = aboutInput.value;
 
-  togglePopupVisability(popupEdit);
+  closePopup(popupEdit);
 }
 
-formElement.addEventListener('submit', handleFormSubmit);
+formElement.addEventListener('submit', handleEditFormSubmit);
 
 editProfileButton.addEventListener('click', () => {
   nameInput.value = profileNameElement.textContent;
   aboutInput.value = profileAboutElement.textContent;
-  togglePopupVisability(popupEdit);
+  openPopup(popupEdit);
 });
 
 function handleAddCardButtonClick() {
-  togglePopupVisability(popupAdd);
+  openPopup(popupAdd);
 }
 
 addCardButton.addEventListener('click', handleAddCardButtonClick);
 
 function handlePopupCloseButtonClick(popup) {
-  togglePopupVisability(popup);
+  closePopup(popup);
 }
 
 editPopupCloseButton.addEventListener('click', () => {
@@ -128,7 +105,7 @@ const createCard = ({ name, link }) => {
     const img = popupImage.querySelector('.popup__image');
     img.src = link;
     img.alt = name;
-    togglePopupVisability(popupImage);
+    openPopup(popupImage);
   });
 
   return card;
@@ -151,11 +128,12 @@ const hendleAddFormSubmit = evt => {
   const link = imageLinkInput.value;
   const cardData = { name, link };
   renderCard(cardData);
-  togglePopupVisability(popupAdd);
+  closePopup(popupAdd);
+  addCardForm.reset();
 };
 
 addCardForm.addEventListener('submit', hendleAddFormSubmit);
 
 imagePopupCloseButton.addEventListener('click', () => {
-  togglePopupVisability(popupImage);
+  handlePopupCloseButtonClick(popupImage);
 });

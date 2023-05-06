@@ -39,14 +39,12 @@
                 class="popup__form-input"
                 placeholder="Ваше Имя"
                 name="nameInput"
-                id="name-input"
               />
               <input
                 type="text"
                 class="popup__form-input"
                 placeholder="Место Работы"
                 name="aboutInput"
-                id="about-input"
               />
             </fieldset>
             <button class="popup__save-button" type="submit">Сохранить</button>
@@ -62,21 +60,19 @@
             id="add-popup-close-button"
           ></button>
           <h2 class="popup__title">Новое Место</h2>
-          <form name="editProfilePopup" class="popup__form" id="add-card-form">
+          <form name="addCardPopup" class="popup__form">
             <fieldset class="popup__form-fieldset">
               <input
                 type="text"
                 class="popup__form-input"
                 placeholder="Название"
                 name="titleInput"
-                id="title-input"
               />
               <input
                 type="text"
                 class="popup__form-input"
                 placeholder="Ссылка на картинку"
                 name="linkInput"
-                id="link-input"
               />
             </fieldset>
             <button class="popup__save-button" type="submit">Создать</button>
@@ -84,15 +80,11 @@
         </div>
       </div>
 
-      <div class="popup" id="popup-card-image">
-        <div class="popup__frame">
+      <div class="popup popup_bg-opacity" id="popup-card-image">
+        <div class="popup__container popup__container_type_figure">
           <figure class="popup__figure">
-            <img
-              src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-              alt="Архыз"
-              class="popup__image"
-            />
-            <figcaption class="popup__caption">Архыз</figcaption>
+            <img src="" alt="" class="popup__image" />
+            <figcaption class="popup__caption"></figcaption>
           </figure>
           <button class="popup__close-button button" type="button" id="pup-img-cls-btn"></button>
         </div>
@@ -101,18 +93,15 @@
 
     <template id="crad-template">
       <article class="card" id="card-template">
-        <img
-          class="card__image"
-          src="images/krachevsk.jpg"
-          alt="Сентинский храм в Карачаево-Черкесии"
-        />
+        <img class="card__image" src="" alt="" />
         <div class="card__info">
-          <h2 class="card__description">Карачаево-Черкесия</h2>
+          <h2 class="card__description"></h2>
           <button class="button card__like-button" type="button"></button>
         </div>
         <button class="card__delete-button button" type="button"></button>
       </article>
     </template>
+    <script src="scripts/constants.js"></script>
     <script src="scripts/index.js"></script>
   </body>
 </html>
