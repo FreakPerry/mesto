@@ -12,15 +12,20 @@ const addCardButton = profileElement.querySelector('.profile__add-button');
 
 // popups
 
+const popups = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('#popup-edit-profile');
 const popupAdd = document.querySelector('#popup-add-card');
 const popupImage = document.querySelector('#popup-card-image');
+
+// forms
+
+const editFormElement = popupEdit.querySelector('.popup__form');
+const addFormElement = popupAdd.querySelector('.popup__form');
 
 // edit popup elements
 
 const editPopupCloseButton = popupEdit.querySelector('.popup__close-button');
 const popupSaveButton = popupEdit.querySelector('.popup__save-button');
-const formElement = popupEdit.querySelector('.popup__form');
 const nameInput = popupEdit.querySelector('.popup__form-input[name="nameInput"]');
 const aboutInput = popupEdit.querySelector('.popup__form-input[name="aboutInput"]');
 
@@ -45,11 +50,31 @@ const cardTemplate = document.querySelector('#crad-template');
 
 const openPopup = function (popup) {
   popup.classList.add('popup_is-opened');
+  document.addEventListener('keydown', closePopupByEsc);
 };
 
 const closePopup = function (popup) {
   popup.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', closePopupByEsc);
 };
+
+const closePopupByEsc = evt => {
+  const key = evt.key;
+
+  if (key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_is-opened');
+
+    closePopup(openedPopup);
+  }
+};
+
+popups.forEach(item => {
+  item.addEventListener('click', evt => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(evt.currentTarget);
+    }
+  });
+});
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
@@ -59,30 +84,39 @@ function handleEditFormSubmit(evt) {
   closePopup(popupEdit);
 }
 
-formElement.addEventListener('submit', handleEditFormSubmit);
+editFormElement.addEventListener('submit', handleEditFormSubmit);
 
-editProfileButton.addEventListener('click', () => {
+function handleEditPopupOpen() {
   nameInput.value = profileNameElement.textContent;
   aboutInput.value = profileAboutElement.textContent;
+  resetErrorValidation(editFormElement, configFormSelector);
+  enabledButton(popupSaveButton);
   openPopup(popupEdit);
-});
+}
 
-function handleAddCardButtonClick() {
+editProfileButton.addEventListener('click', handleEditPopupOpen);
+
+function handleAddCardPopupOpen() {
+  titleInput.value = '';
+  imageLinkInput.value = '';
+  resetErrorValidation(addFormElement, configFormSelector);
+  disabledButton(popupSaveButton);
   openPopup(popupAdd);
 }
 
-addCardButton.addEventListener('click', handleAddCardButtonClick);
+addCardButton.addEventListener('click', handleAddCardPopupOpen);
 
-function handlePopupCloseButtonClick(popup) {
+function handlePopupCloseButtonClick(popup, formElement) {
+  resetErrorValidation(formElement, configFormSelector);
   closePopup(popup);
 }
 
 editPopupCloseButton.addEventListener('click', () => {
-  handlePopupCloseButtonClick(popupEdit);
+  handlePopupCloseButtonClick(popupEdit, editFormElement);
 });
 
 addPopupCloseButton.addEventListener('click', () => {
-  handlePopupCloseButtonClick(popupAdd);
+  handlePopupCloseButtonClick(popupAdd, addFormElement);
 });
 
 const createCard = ({ name, link }) => {
@@ -129,11 +163,93 @@ const hendleAddFormSubmit = evt => {
   const cardData = { name, link };
   renderCard(cardData);
   closePopup(popupAdd);
-  addCardForm.reset();
+  addFormElement.reset();
 };
 
-addCardForm.addEventListener('submit', hendleAddFormSubmit);
+addFormElement.addEventListener('submit', hendleAddFormSubmit);
 
 imagePopupCloseButton.addEventListener('click', () => {
   handlePopupCloseButtonClick(popupImage);
 });
+
+const showError = (inputElement, errorElement, config) => {
+  inputElement.classList.add(config.inputErrorClass);
+  errorElement.textContent = inputElement.validationMessage;
+};
+
+const hideError = (inputElement, errorElement, config) => {
+  inputElement.classList.remove(config.inputErrorClass);
+  errorElement.textContent = inputElement.validationMessage;
+};
+
+const disabledButton = buttonElement => {
+  buttonElement.disabled = 'disabled';
+};
+
+const enabledButton = buttonElement => {
+  buttonElement.disabled = false;
+};
+
+const resetErrorValidation = (formElement, config) => {
+  const inputList = formElement.querySelectorAll(config.inputSelector);
+
+  inputList.forEach(inputElement => {
+    const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
+    hideError(inputElement, errorElement, config);
+  });
+};
+
+const toggleButtonState = (buttonElement, isActive) => {
+  if (!isActive) {
+    disabledButton(buttonElement);
+  } else {
+    enabledButton(buttonElement);
+  }
+};
+
+const checkInputValidity = (inputElement, formElement, config) => {
+  const isInputValid = inputElement.validity.valid;
+  const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
+  if (!errorElement) return;
+
+  if (!isInputValid) {
+    showError(inputElement, errorElement, config);
+  } else {
+    hideError(inputElement, errorElement, config);
+  }
+};
+
+const setEventListener = (formElement, config) => {
+  const inputList = formElement.querySelectorAll(config.inputSelector);
+  const submitButtonElement = formElement.querySelector(config.submitButtonSelector);
+
+  toggleButtonState(submitButtonElement, formElement.checkValidity());
+
+  formElement.addEventListener('submit', evt => {
+    evt.preventDefault();
+  });
+
+  [...inputList].forEach(inputItem => {
+    inputItem.addEventListener('input', () => {
+      checkInputValidity(inputItem, formElement, config);
+      toggleButtonState(submitButtonElement, formElement.checkValidity());
+    });
+  });
+};
+
+const enableValidation = config => {
+  const forms = document.querySelectorAll(config.formSelector);
+
+  [...forms].forEach(formItem => {
+    setEventListener(formItem, config);
+  });
+};
+
+const configFormSelector = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__form-input',
+  submitButtonSelector: '.popup__save-button',
+  inputErrorClass: 'popup__form-input_type_error'
+};
+
+enableValidation(configFormSelector);
