@@ -1,6 +1,6 @@
 import { initialCards, configFormSelector } from './constants.js';
 import Card from './Card.js';
-import FormValidation from './FormValidator.js';
+import FormValidation from './FormValidation.js';
 
 // profile info
 
