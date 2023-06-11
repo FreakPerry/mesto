@@ -1,6 +1,6 @@
 import { initialCards, configFormSelector } from './constants.js';
-import Card from './card.js';
-import FormValidation from './formValidator.js';
+import Card from './Card.js';
+import FormValidation from './FormValidator.js';
 
 // profile info
 
@@ -23,8 +23,9 @@ const popupImage = document.querySelector('#popup-card-image');
 
 // forms
 
-const editFormElement = popupEdit.querySelector('.popup__form');
-const addFormElement = popupAdd.querySelector('.popup__form');
+const editFormElement = document.forms['editProfilePopup'];
+const addFormElement = document.forms['addCardPopup'];
+const formValidators = {};
 
 // edit popup elements
 
@@ -101,42 +102,52 @@ function handleEditPopupOpen() {
 editProfileButton.addEventListener('click', handleEditPopupOpen);
 
 function handleAddCardPopupOpen() {
-  addFormElement.reset();
+  formValidators['addCardPopup']._resetErrorValidation();
   openPopup(popupAdd);
 }
 
 addCardButton.addEventListener('click', handleAddCardPopupOpen);
 
-function handlePopupCloseButtonClick(popup) {
-  closePopup(popup);
-}
-
-editPopupCloseButton.addEventListener('click', () => {
-  handlePopupCloseButtonClick(popupEdit, editFormElement);
+popups.forEach(popup => {
+  popup.addEventListener('mousedown', evt => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains('popup__close-button')) {
+      closePopup(popup);
+    }
+  });
 });
 
-addPopupCloseButton.addEventListener('click', () => {
-  handlePopupCloseButtonClick(popupAdd, addFormElement);
-});
+const enableValidation = config => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
 
-const editFormValidator = new FormValidation(configFormSelector, editFormElement);
+  formList.forEach(formElement => {
+    const validator = new FormValidation(config, formElement);
 
-editFormValidator.enableValidation();
+    const formName = formElement.getAttribute('name');
 
-const addFormValidator = new FormValidation(configFormSelector, addFormElement);
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
 
-addFormValidator.enableValidation();
+enableValidation(configFormSelector);
+
+const handleCardClick = (link, name) => {
+  img.src = link;
+  img.alt = name;
+  imgCaption.textContent = name;
+  openPopup(popupImage);
+};
 
 const createCard = cardData => {
-  const card = new Card(cardData, '#card-template');
+  const card = new Card(cardData, '#card-template', handleCardClick);
 
   return card.renderCard();
 };
 
-const cardList = initialCards.map(cardData => {
-  const cardElement = createCard(cardData);
-  return cardElement;
-});
+const cardList = initialCards.map(createCard);
 
 const renderCard = cardData => {
   cardContainer.prepend(createCard(cardData));
@@ -152,6 +163,7 @@ const hendleAddFormSubmit = evt => {
   renderCard(cardData);
   closePopup(popupAdd);
   addFormElement.reset();
+  formValidators['addCardPopup']._resetErrorValidation();
 };
 
 addFormElement.addEventListener('submit', hendleAddFormSubmit);
@@ -159,10 +171,3 @@ addFormElement.addEventListener('submit', hendleAddFormSubmit);
 imagePopupCloseButton.addEventListener('click', () => {
   handlePopupCloseButtonClick(popupImage);
 });
-
-export const openImagePopup = (link, name) => {
-  img.src = link;
-  img.alt = name;
-  imgCaption.textContent = name;
-  openPopup(popupImage);
-};

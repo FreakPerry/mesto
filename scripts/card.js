@@ -1,15 +1,14 @@
-import { openImagePopup } from './index.js';
-
 export default class Card {
-  constructor(data, selector) {
+  constructor(data, selector, handleCardClick) {
     this._image = data.link;
     this._title = data.name;
     this._selector = selector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getElement() {
     const card = document
-      .querySelector('#card-template')
+      .querySelector(this._selector)
       .content.querySelector('.card')
       .cloneNode(true);
     return card;
@@ -41,9 +40,8 @@ export default class Card {
       this._like();
     });
 
-    this._imageElement = this._card.querySelector('.card__image');
     this._imageElement.addEventListener('click', () => {
-      openImagePopup(this._imageElement.src, this._imageElement.alt);
+      this._handleCardClick(this._imageElement.src, this._imageElement.alt);
     });
   }
 
@@ -52,8 +50,6 @@ export default class Card {
   }
 
   _like() {
-    this._likeButton = this._card.querySelector('.card__like-button');
-
     this._likeButton.classList.toggle('card__like-button_active');
   }
 }

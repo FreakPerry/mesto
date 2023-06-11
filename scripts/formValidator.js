@@ -2,6 +2,8 @@ export default class FormValidation {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
+    this._inputList = this._formElement.querySelectorAll(this._config.inputSelector);
+    this._submitButtonElement = this._formElement.querySelector(this._config.submitButtonSelector);
   }
 
   _showError(inputElement) {
@@ -25,25 +27,21 @@ export default class FormValidation {
   }
 
   _resetErrorValidation() {
-    const inputList = this._formElement.querySelectorAll(this._config.inputSelector);
-    const submitButtonElement = this._formElement.querySelector(this._config.submitButtonSelector);
-
-    inputList.forEach(inputElement => {
+    this._inputList.forEach(inputElement => {
       this._hideError(inputElement);
     });
 
-    this._disabledButton(submitButtonElement);
+    this._disabledButton(this._submitButtonElement);
   }
 
   _toggleButtonState() {
-    const inputList = this._formElement.querySelectorAll(this._config.inputSelector);
-    const submitButtonElement = this._formElement.querySelector(this._config.submitButtonSelector);
-
-    const isFormValid = Array.from(inputList).every(inputElement => inputElement.validity.valid);
+    const isFormValid = Array.from(this._inputList).every(
+      inputElement => inputElement.validity.valid
+    );
     if (isFormValid) {
-      this._enabledButton(submitButtonElement);
+      this._enabledButton(this._submitButtonElement);
     } else {
-      this._disabledButton(submitButtonElement);
+      this._disabledButton(this._submitButtonElement);
     }
   }
 
@@ -56,9 +54,7 @@ export default class FormValidation {
   }
 
   _setEventListeners() {
-    const inputList = this._formElement.querySelectorAll(this._config.inputSelector);
-
-    inputList.forEach(inputElement => {
+    this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
