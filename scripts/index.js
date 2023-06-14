@@ -103,6 +103,7 @@ editProfileButton.addEventListener('click', handleEditPopupOpen);
 
 function handleAddCardPopupOpen() {
   openPopup(popupAdd);
+  formValidators['addCardPopup'].toggleButtonState();
 }
 
 addCardButton.addEventListener('click', handleAddCardPopupOpen);
@@ -162,11 +163,7 @@ const hendleAddFormSubmit = evt => {
   renderCard(cardData);
   closePopup(popupAdd);
   addFormElement.reset();
-  formValidators['addCardPopup']._resetErrorValidation();
+  formValidators['addCardPopup'].resetErrorValidation();
 };
 
 addFormElement.addEventListener('submit', hendleAddFormSubmit);
-
-imagePopupCloseButton.addEventListener('click', () => {
-  handlePopupCloseButtonClick(popupImage);
-});

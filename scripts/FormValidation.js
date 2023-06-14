@@ -26,7 +26,7 @@ export default class FormValidation {
     buttonElement.disabled = false;
   }
 
-  _resetErrorValidation() {
+  resetErrorValidation() {
     this._inputList.forEach(inputElement => {
       this._hideError(inputElement);
     });
@@ -34,7 +34,7 @@ export default class FormValidation {
     this._disabledButton(this._submitButtonElement);
   }
 
-  _toggleButtonState() {
+  toggleButtonState() {
     const isFormValid = Array.from(this._inputList).every(
       inputElement => inputElement.validity.valid
     );
@@ -57,7 +57,7 @@ export default class FormValidation {
     this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
 
