@@ -102,7 +102,6 @@ function handleEditPopupOpen() {
 editProfileButton.addEventListener('click', handleEditPopupOpen);
 
 function handleAddCardPopupOpen() {
-  formValidators['addCardPopup']._resetErrorValidation();
   openPopup(popupAdd);
 }
 
