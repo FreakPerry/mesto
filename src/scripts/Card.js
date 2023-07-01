@@ -41,7 +41,7 @@ export default class Card {
     });
 
     this._imageElement.addEventListener('click', () => {
-      this._handleCardClick(this._imageElement.src, this._imageElement.alt);
+      this._handleCardClick(this._image, this._title);
     });
   }
 
