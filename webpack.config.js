@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { webpack } = require('webpack');
 
 module.exports = {
-  entry: './src/scripts/index.js',
+  entry: './src/page/index.js',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),

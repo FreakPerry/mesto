@@ -1,12 +1,12 @@
 import '../page/index.css';
 
-import { initialCards, configFormSelector } from './constants.js';
-import Card from './Card.js';
-import FormValidation from './FormValidation.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage';
-import PopupWithForm from './PopupWithForm';
-import UserInfo from './UserInfo';
+import { initialCards, configFormSelector } from '../components/constants.js';
+import Card from '../components/Card.js';
+import FormValidation from '../components/FormValidation.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage';
+import PopupWithForm from '../components/PopupWithForm';
+import UserInfo from '../components/UserInfo';
 
 // profile info
 
@@ -77,18 +77,19 @@ function handleCardClick(link, name) {
   imagePopup.open(link, name);
 }
 
-function getProfileInputsValues() {
-  nameInput.value = profileNameElement.textContent;
-  aboutInput.value = profileAboutElement.textContent;
-}
+const userInfo = new UserInfo({
+  profileName: profileNameElement,
+  profileAbout: profileAboutElement
+});
 
 function submitProfileForm(userData) {
   userInfo.setUserInfo(userData);
 }
 
 editProfileButton.addEventListener('click', () => {
+  const userData = userInfo.getUserInfo();
+  editPopup.setProfileInputValues(userData);
   editPopup.open();
-  getProfileInputsValues();
   editFormValidation.resetErrorValidation();
 });
 
@@ -113,7 +114,3 @@ const addPopup = new PopupWithForm(popupAdd, submitPlaceForm);
 addPopup.setEventListeners();
 const imagePopup = new PopupWithImage(popupImage);
 imagePopup.setEventListeners();
-const userInfo = new UserInfo({
-  profileName: profileNameElement,
-  profileAbout: profileAboutElement
-});
