@@ -129,15 +129,17 @@ async function handleCardFormSubmit(data) {
   }
 }
 
-const confirmPopup = new PopupConfirm(popupConfirm, async card => {
+const confirmPopup = new PopupConfirm(popupConfirm);
+const handleDeleteCard = async () => {
   try {
-    await api.deleteCard(card._id);
-    card.delete();
+    await api.deleteCard(confirmPopup._card._id);
+    confirmPopup._card.delete();
     confirmPopup.close();
   } catch (e) {
     console.warn(e);
   }
-});
+};
+confirmPopup.setCallback(handleDeleteCard);
 confirmPopup.setEventListeners();
 
 addCardButton.addEventListener('click', () => {
@@ -163,7 +165,7 @@ async function handleAvatarFormSubmit(data) {
 
 avatarButton.addEventListener('click', () => {
   avatarPopup.open();
-  addFormValidation.resetErrorValidation();
+  avatarFormValidation.resetErrorValidation();
 });
 
 const editFormValidation = new FormValidation(configFormSelector, editFormElement);
