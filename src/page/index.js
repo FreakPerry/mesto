@@ -105,12 +105,14 @@ async function handleProfileFormSubmit(data) {
   }
 }
 
-editProfileButton.addEventListener('click', () => {
+const openEditPopupWithUserData = () => {
   const userData = userInfo.getUserInfo();
   editPopup.setInputValues(userData);
   editPopup.open();
   editFormValidation.resetErrorValidation();
-});
+};
+
+editProfileButton.addEventListener('click', openEditPopupWithUserData);
 
 const addPopup = new PopupWithForm(popupAdd, handleCardFormSubmit);
 addPopup.setEventListeners();
