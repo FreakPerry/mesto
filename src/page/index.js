@@ -17,7 +17,7 @@ import {
   addFormElement,
   avatarFormElement,
   cardContainer
-} from '../components/constants.js';
+} from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidation from '../components/FormValidation.js';
 import Section from '../components/Section.js';
@@ -30,11 +30,11 @@ import { data } from 'browserslist';
 
 let userId;
 
-const cardList = new Section(
+const cardsSection = new Section(
   {
     renderer: data => {
       const card = createCard(data);
-      cardList.addItem(card);
+      cardsSection.addItem(card);
     }
   },
   cardContainer
@@ -56,7 +56,7 @@ const createCard = function (data) {
       try {
         const res = await api.like(data._id);
         card.like();
-        card.setLikesCount(res);
+        card.setLikesCount(res.likes.length);
       } catch (e) {
         console.warn(e);
       }
@@ -65,7 +65,7 @@ const createCard = function (data) {
       try {
         const res = await api.dislike(data._id);
         card.dislike();
-        card.setLikesCount(res);
+        card.setLikesCount(res.likes.length);
       } catch (e) {
         console.warn(e);
       }
@@ -89,10 +89,10 @@ const userInfo = new UserInfo({
   profileAvatar: profileAvatarElement
 });
 
-const editPopup = new PopupWithForm(popupEdit, submitProfileForm);
+const editPopup = new PopupWithForm(popupEdit, handleProfileFormSubmit);
 editPopup.setEventListeners();
 
-async function submitProfileForm(data) {
+async function handleProfileFormSubmit(data) {
   editPopup.renderLoading(true, 'Сохранение...');
   try {
     const res = await api.editUserInfo(data);
@@ -107,20 +107,20 @@ async function submitProfileForm(data) {
 
 editProfileButton.addEventListener('click', () => {
   const userData = userInfo.getUserInfo();
-  editPopup.setProfileInputValues(userData);
+  editPopup.setInputValues(userData);
   editPopup.open();
   editFormValidation.resetErrorValidation();
 });
 
-const addPopup = new PopupWithForm(popupAdd, submitPlaceForm);
+const addPopup = new PopupWithForm(popupAdd, handleCardFormSubmit);
 addPopup.setEventListeners();
 
-async function submitPlaceForm(data) {
+async function handleCardFormSubmit(data) {
   addPopup.renderLoading(true, 'Сохранение...');
   try {
     const res = await api.addCards(data);
     const card = createCard(res);
-    cardList.addItem(card);
+    cardsSection.addItem(card);
     addPopup.close();
   } catch (e) {
     console.warn(e);
@@ -145,10 +145,10 @@ addCardButton.addEventListener('click', () => {
   addFormValidation.resetErrorValidation();
 });
 
-const avatarPopup = new PopupWithForm(popupAvatar, submitAvatarForm);
+const avatarPopup = new PopupWithForm(popupAvatar, handleAvatarFormSubmit);
 avatarPopup.setEventListeners();
 
-async function submitAvatarForm(data) {
+async function handleAvatarFormSubmit(data) {
   avatarPopup.renderLoading(true, 'Сохранение...');
   try {
     const res = await api.editAvatar(data);
@@ -186,6 +186,6 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([cards, userData]) => {
     userId = userData._id;
     userInfo.setUserInfo(userData);
-    cardList.renderItems(cards.reverse());
+    cardsSection.renderItems(cards.reverse());
   })
   .catch(e => console.log(e));

@@ -18,12 +18,12 @@ export default class FormValidation {
     errorElement.textContent = '';
   }
 
-  _disabledButton(buttonElement) {
-    buttonElement.disabled = true;
+  _disableButton() {
+    this._submitButtonElement.disabled = true;
   }
 
-  _enabledButton(buttonElement) {
-    buttonElement.disabled = false;
+  _enableButton() {
+    this._submitButtonElement.disabled = false;
   }
 
   resetErrorValidation() {
@@ -31,7 +31,7 @@ export default class FormValidation {
       this._hideError(inputElement);
     });
 
-    this._disabledButton(this._submitButtonElement);
+    this._disableButton();
   }
 
   toggleButtonState() {
@@ -39,9 +39,9 @@ export default class FormValidation {
       inputElement => inputElement.validity.valid
     );
     if (isFormValid) {
-      this._enabledButton(this._submitButtonElement);
+      this._enableButton();
     } else {
-      this._disabledButton(this._submitButtonElement);
+      this._disableButton();
     }
   }
 
@@ -59,10 +59,6 @@ export default class FormValidation {
         this._checkInputValidity(inputElement);
         this.toggleButtonState();
       });
-    });
-
-    this._formElement.addEventListener('submit', evt => {
-      evt.preventDefault();
     });
   }
 

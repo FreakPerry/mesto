@@ -18,7 +18,7 @@ export default class PopupWithForm extends Popup {
     return this._inputValues;
   }
 
-  setProfileInputValues = data => {
+  setInputValues = data => {
     this._inputList.forEach(input => {
       input.value = data[input.name];
     });
@@ -42,7 +42,6 @@ export default class PopupWithForm extends Popup {
     this._popup.addEventListener('submit', evt => {
       evt.preventDefault();
       this._submitCallback(this._getInputValues());
-      this.close();
     });
   }
 }
