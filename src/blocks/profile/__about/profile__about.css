@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 659px) {
+@media screen and (max-width: 900px) {
   .profile__about {
     max-width: 282px;
     font-size: 14px;
