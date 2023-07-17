@@ -40,6 +40,9 @@ const cardsSection = new Section(
   cardContainer
 );
 
+const confirmPopup = new PopupConfirm(popupConfirm);
+confirmPopup.setEventListeners();
+
 const createCard = function (data) {
   const card = new Card(
     {
@@ -71,9 +74,20 @@ const createCard = function (data) {
       }
     },
     () => {
-      confirmPopup.open(card);
+      confirmPopup.open();
+      confirmPopup.setCallback(handleDeleteCard);
     }
   );
+
+  const handleDeleteCard = async () => {
+    try {
+      await api.deleteCard(card._id);
+      card.delete();
+      confirmPopup.close();
+    } catch (e) {
+      console.warn(e);
+    }
+  };
 
   const cardElement = card.renderCard();
   return cardElement;
@@ -130,19 +144,6 @@ async function handleCardFormSubmit(data) {
     addPopup.renderLoading(false);
   }
 }
-
-const confirmPopup = new PopupConfirm(popupConfirm);
-const handleDeleteCard = async () => {
-  try {
-    await api.deleteCard(confirmPopup._card._id);
-    confirmPopup._card.delete();
-    confirmPopup.close();
-  } catch (e) {
-    console.warn(e);
-  }
-};
-confirmPopup.setCallback(handleDeleteCard);
-confirmPopup.setEventListeners();
 
 addCardButton.addEventListener('click', () => {
   addPopup.open();
