@@ -81,7 +81,7 @@ const createCard = function (data) {
 
   const handleDeleteCard = async () => {
     try {
-      await api.deleteCard(card._id);
+      await api.deleteCard(data._id);
       card.delete();
       confirmPopup.close();
     } catch (e) {
