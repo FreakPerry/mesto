@@ -1,21 +1,50 @@
-# Project: Mesto
+# Mesto
 
-## Description
+**Mesto** is a responsive single-page web application that allows users to manage a travel-themed photo gallery. Users can edit their profile information, update their avatar, add or delete photo cards, and like cards. All data is handled through interaction with an external REST API. The interface includes animated popups and client-side form validation.
 
-This project showcases a traveler's profile. The website adapts seamlessly to different devices and screen sizes. It offers features such as editing personal information and creating new cards, with data storage and retrieval handled via an API. Users can like or delete each card, and all pop-up windows feature smooth animations for fluid interaction.
+---
 
-## Figma layout
+## Demo
 
-The project layout is available in Figma and can be accessed via the [link](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=28212-212&t=1IvZptFkhzpIH0Jy-0). The layout demonstrates how the website should look on the most popular screen resolutions.
+[View the live project on GitHub Pages](https://freakperry.github.io/mesto/)
 
-## Technologies
+---
 
-<div align="center">  
-<a href="https://en.wikipedia.org/wiki/HTML5" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/html5-original-wordmark.svg" alt="HTML5" height="50" /></a>  
-<a href="https://www.w3schools.com/css/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/css3-original-wordmark.svg" alt="CSS3" height="50" /></a>  
-<a href="https://www.javascript.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/javascript-original.svg" alt="JavaScript" height="50" /></a>  
-</div>
+## Features
 
-## GitHub Pages
+- Responsive design (mobile & desktop)
+- Edit profile and avatar
+- Add and delete photo cards
+- Like/unlike cards
+- Fetch and sync data via REST API
+- Smooth popup animations
+- Client-side form validation
 
-The project is hosted on [GitHub Pages](https://freakperry.github.io/mesto/).
+---
+
+## Technologies Used
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![BEM](https://img.shields.io/badge/BEM-000?style=flat&logo=css3&logoColor=white)
+![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=flat&logo=webpack&logoColor=black)
+
+---
+
+## Layout
+
+The project layout is available in Figma:  
+[Open Figma Design](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=28212-212&t=1IvZptFkhzpIH0Jy-0)
+
+---
+
+## Getting Started
+
+To run the project locally:
+
+```bash
+git clone https://github.com/FreakPerry/mesto.git
+cd mesto
+npm install
+npm run start
