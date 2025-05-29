@@ -10,6 +10,13 @@
 
 ---
 
+## Screenshots
+
+![Main page](./src/images/screenshots/Screenshot%202025-05-29%20at%2023.37.10.png)
+![Popup with form](./src/images/screenshots/Screenshot%202025-05-29%20at%2023.37.02.png)
+
+---
+
 ## Features
 
 - Responsive design (mobile & desktop)
@@ -48,3 +55,4 @@ git clone https://github.com/FreakPerry/mesto.git
 cd mesto
 npm install
 npm run start
+```
