@@ -10,10 +10,9 @@
 
 ---
 
-## Screenshots
+## Preview
 
-![Main page](./src/images/screenshots/Screenshot%202025-05-29%20at%2023.37.10.png)
-![Popup with form](./src/images/screenshots/Screenshot%202025-05-29%20at%2023.37.02.png)
+![Preview](./src/images/screenshots/Screen%20Recording%202025-05-30%20at%2000.08.11.mov.gif)
 
 ---
 
