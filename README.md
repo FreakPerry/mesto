@@ -25,7 +25,7 @@ This project was built multiple times as part of my learning journey:
 | [Vanilla JS Version](https://github.com/FreakPerry/mesto) | HTML/CSS/JS | First version — no frameworks, focusing on DOM, API and layout |
 | [React Version](https://github.com/FreakPerry/mesto-react) | React | Refactored to use component-based architecture |
 | [Auth Version (React)](https://github.com/FreakPerry/react-mesto-auth) | React + Auth | Added login/registration, token-based authentication and protected routes |
-| [Fullstack Version](https://github.com/FreakPerry/mesto-api) | React + Node.js | Backend fully written by me using Express & MongoDB |
+| [Fullstack Version](https://github.com/FreakPerry/react-mesto-api-full-gha) | React + Node.js | Backend fully written by me using Express & MongoDB |
 
 ---
 
