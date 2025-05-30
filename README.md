@@ -70,18 +70,18 @@ npm install
 
 ### 🧪 Run in development mode
 
-```
+```bash
 npm run dev
 ```
 
 ### 🏗 Build for production
 
-```
+```bash
 npm run build
 ```
 
 ### 🚀 Deploy to GitHub Pages
 
-```
+```bash
 npm run deploy
 ```
